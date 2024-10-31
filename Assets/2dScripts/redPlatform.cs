@@ -5,12 +5,13 @@ using UnityEngine;
 public class redPlatform : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    public Color color1 = Color.blue;  // First color
-    public Color color2 = Color.red; // Second color
-    public Color destroyColor = Color.red;
-    public float changeInterval = 5f;  // Time in seconds between color changes
+    [SerializeField] private Color color1;  // First color
+    [SerializeField] private Color color2; // Second color
+    [SerializeField] private Color destroyColor = Color.red;
+    [SerializeField] private float changeInterval = 5f;  // Time in seconds between color changes
     private float timeElapsed = 0f;    // Time tracker
     private bool isColor1 = true;      // Tracks which color is currently active
+    
 
     void Start()
     {
@@ -48,4 +49,5 @@ public class redPlatform : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
 }

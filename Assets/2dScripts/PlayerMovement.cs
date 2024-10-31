@@ -27,11 +27,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Moverse en eje X con Flechas
+        // Move X axis with arrows
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
 
-        // Inicia el salto
-        if (Input.GetKey(KeyCode.UpArrow) &&  rb.velocity.y > 0 && grounded)
+        // Start jump
+        if (Input.GetKey(KeyCode.Space) &&  rb.velocity.y > 0 && grounded)
         {
             isJumping = true;
             jumpTimeCounter = maxJumpTime;
@@ -39,8 +39,8 @@ public class PlayerMovement : MonoBehaviour
             grounded = false;
         }
 
-        // Si se mantiene la tecla presionada y aún no ha comenzado a caer
-        if (Input.GetKey(KeyCode.UpArrow) && isJumping && rb.velocity.y > 0)
+        // If jump key is sustained during jump and player is not falling yet 
+        if (Input.GetKey(KeyCode.Space) && isJumping && rb.velocity.y > 0)
         {
             if (jumpTimeCounter > 0)
             {
@@ -53,8 +53,8 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Si el jugador suelta la tecla o comienza a caer
-        if (Input.GetKeyUp(KeyCode.UpArrow) || rb.velocity.y <= 0)
+        // If player realeses key or starts falling
+        if (Input.GetKeyUp(KeyCode.Space) || rb.velocity.y <= 0)
         {
             isJumping = false;
         }

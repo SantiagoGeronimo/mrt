@@ -561,6 +561,7 @@ GameObject:
   - component: {fileID: 1840518115}
   - component: {fileID: 1840518114}
   - component: {fileID: 1840518118}
+  - component: {fileID: 1840518119}
   m_Layer: 0
   m_Name: TestPlatform
   m_TagString: Ground
@@ -691,8 +692,8 @@ Transform:
   m_GameObject: {fileID: 1840518113}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.7266, y: -1.4664, z: 0}
-  m_LocalScale: {x: 5.2932, y: 0.5528, z: 1}
+  m_LocalPosition: {x: 3.3575, y: -1.4664, z: 0}
+  m_LocalScale: {x: 4.031301, y: 0.5528, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -742,6 +743,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1840518119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840518113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b2ea42d6dbe324980db8bbb8b1efb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointA: {x: 3.3575, y: -1.4664}
+  pointB: {x: -3.72, y: -1.4664}
+  speed: 2
+  pauseDuration: 2
 --- !u!1 &1954812442
 GameObject:
   m_ObjectHideFlags: 0
