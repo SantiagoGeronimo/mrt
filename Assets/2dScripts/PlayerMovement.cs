@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -18,11 +19,32 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private SaveAndReset saveAndReset;
+    [SerializeField] private TrailRenderer tr;
 
     public bool bouncing = false;
 
+    void Start()
+    {
+        if (saveAndReset != null)
+        {
+            saveAndReset.SavePosition(this.gameObject.transform.position);
+        }
+    }
+
     void Update()
     {
+
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            saveAndReset.SavePosition(this.gameObject.transform.position);
+        }
+
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            GoToLastReset();
+        }
+
         if (isDashing)
         {
             return; 
@@ -51,6 +73,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Flip();
+    }
+
+    private void GoToLastReset()
+    {
+        gameObject.transform.position = saveAndReset.GetSavedPosition();
     }
 
     private void FixedUpdate()
@@ -82,14 +109,16 @@ public class PlayerMovement : MonoBehaviour
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
+        tr.emitting = false;
         rb.gravityScale = originalGravity;
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
     }
 
-    // Si alguna vez le meto un sprite lo voy a usar esto
+    
     private void Flip()
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
@@ -100,4 +129,11 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = localScale;
         }
     }
+
+    public void PlayerDeath()
+    {
+        GoToLastReset();
+    }
+
+
 }

@@ -25,9 +25,15 @@ public class RedBehavior : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        
         if (rendererComponent.color == Color.red && collision.gameObject.tag == ("Player"))
         {
-            Debug.Log("muelto");
+            var go = collision.gameObject.GetComponent<PlayerMovement>();
+            if (go != null)
+            {
+                go.PlayerDeath();
+            }
+
         }
     }
 }
