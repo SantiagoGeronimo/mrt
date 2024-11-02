@@ -13,8 +13,6 @@ public class GreenBehavior : MonoBehaviour
         {
             rendererComponent = GetComponent<SpriteRenderer>();
         }
-
-        rendererComponent.color = Color.blue;
     }
     void Start()
     {

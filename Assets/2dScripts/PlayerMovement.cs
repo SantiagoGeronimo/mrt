@@ -1,18 +1,19 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     private float horizontal;
-    
     private bool isFacingRight = true;
 
     private bool canDash = true;
-    private bool isDashing = false;
+    public bool isDashing = false;
     private float dashingPower = 18f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
+
+    private bool isWallSliding;
+    public float wallSlidingSpeed = 0.5f; // Ajuste de velocidad de resbalado
 
     [SerializeField] private float speed;
     [SerializeField] private float jumpingPower;
@@ -21,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private SaveAndReset saveAndReset;
     [SerializeField] private TrailRenderer tr;
+    [SerializeField] private Transform wallCheck;
+    [SerializeField] private LayerMask wallLayer;
 
     public bool bouncing = false;
 
@@ -34,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
         if (Input.GetKeyUp(KeyCode.E))
         {
             saveAndReset.SavePosition(this.gameObject.transform.position);
@@ -45,12 +47,7 @@ public class PlayerMovement : MonoBehaviour
             GoToLastReset();
         }
 
-        if (isDashing)
-        {
-            return; 
-        }
-
-        if (bouncing)
+        if (isDashing || bouncing)
         {
             return;
         }
@@ -72,12 +69,8 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Dash());
         }
 
+        WallSlide();
         Flip();
-    }
-
-    private void GoToLastReset()
-    {
-        gameObject.transform.position = saveAndReset.GetSavedPosition();
     }
 
     private void FixedUpdate()
@@ -87,12 +80,37 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        // Control del movimiento horizontal
+        if (!isWallSliding) // Solo se mueve en el eje X si no está resbalando
+        {
+            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        }
+    }
+
+    private bool IsWalled()
+    {
+        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
+    }
+
+    private void WallSlide()
+    {
+        if (IsWalled() && !IsGrounded())
+        {
+            isWallSliding = true;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y - 0.1f, -wallSlidingSpeed, float.MaxValue));
+        }
+        else
+        {
+            isWallSliding = false;
+        }
+    }
+    private void GoToLastReset()
+    {
+        gameObject.transform.position = saveAndReset.GetSavedPosition();
     }
 
     private bool IsGrounded()
     {
-        
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
@@ -100,6 +118,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(groundCheck.position, 0.2f);
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(wallCheck.position, 0.2f);
     }
 
     private IEnumerator Dash()
@@ -118,7 +138,6 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
     }
 
-    
     private void Flip()
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
@@ -134,6 +153,4 @@ public class PlayerMovement : MonoBehaviour
     {
         GoToLastReset();
     }
-
-
 }
