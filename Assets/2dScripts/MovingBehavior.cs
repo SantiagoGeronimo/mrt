@@ -52,6 +52,6 @@ public class MovingBehavior : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        collision.transform.SetParent(null);
+        collision.transform.parent = null;
     }
 }

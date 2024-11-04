@@ -149,6 +149,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnApplicationQuit()
+    {
+        transform.parent = null;
+    }
+
     public void PlayerDeath()
     {
         GoToLastReset();
