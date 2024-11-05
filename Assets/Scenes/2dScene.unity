@@ -188,7 +188,6 @@ Transform:
   - {fileID: 1795360275}
   - {fileID: 345230185}
   - {fileID: 1433955382}
-  - {fileID: 1716153917}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &66397325
@@ -222,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc9ba74489b6ca47bffad8bc62c8499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bouncePower: 11
+  greenPlatformSO: {fileID: 11400000, guid: 60f671635a21fb24b9e43fab8cc8a9e3, type: 2}
 --- !u!61 &66397327
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -620,7 +619,7 @@ Transform:
   m_GameObject: {fileID: 181026502}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.31, y: -3.92, z: 0}
+  m_LocalPosition: {x: -7.25, y: -3.84, z: 0}
   m_LocalScale: {x: 0.58688945, y: 0.5483929, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -668,9 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDashing: 0
-  wallSlidingSpeed: 2
-  speed: 6
-  jumpingPower: 11
+  playerData: {fileID: 11400000, guid: 54096687cb19359469f5d2cf5a2479fb, type: 2}
   rb: {fileID: 181026508}
   groundCheck: {fileID: 555345604}
   groundLayer:
@@ -1071,11 +1068,11 @@ Transform:
   m_GameObject: {fileID: 257133143}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.65, y: 6.34, z: 0}
+  m_LocalPosition: {x: 6.6499996, y: 6.3399997, z: 0}
   m_LocalScale: {x: 0.66780996, y: 0.38044998, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 747038780}
+  m_Father: {fileID: 981099700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &257133145
 MonoBehaviour:
@@ -1089,7 +1086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc9ba74489b6ca47bffad8bc62c8499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bouncePower: 11
+  greenPlatformSO: {fileID: 11400000, guid: 60f671635a21fb24b9e43fab8cc8a9e3, type: 2}
 --- !u!61 &257133146
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4341,7 +4338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc9ba74489b6ca47bffad8bc62c8499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bouncePower: 11
+  greenPlatformSO: {fileID: 11400000, guid: 60f671635a21fb24b9e43fab8cc8a9e3, type: 2}
 --- !u!61 &730478849
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4870,8 +4867,6 @@ Transform:
   - {fileID: 1734116355}
   - {fileID: 2042602028}
   - {fileID: 981099700}
-  - {fileID: 257133144}
-  - {fileID: 1112382263}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &759676151
@@ -5585,7 +5580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc9ba74489b6ca47bffad8bc62c8499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bouncePower: 11
+  greenPlatformSO: {fileID: 11400000, guid: 60f671635a21fb24b9e43fab8cc8a9e3, type: 2}
 --- !u!61 &965365669
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5716,6 +5711,7 @@ Transform:
   - {fileID: 759676152}
   - {fileID: 584495004}
   - {fileID: 1216082113}
+  - {fileID: 257133144}
   m_Father: {fileID: 747038780}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1067856358
@@ -5858,6 +5854,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1078430484}
+  - component: {fileID: 1078430485}
   m_Layer: 0
   m_Name: SelectRoomManager
   m_TagString: Untagged
@@ -5880,6 +5877,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 621801538}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1078430485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078430483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b2ceb377d0e0d48a3f5520d3c4617d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 181026508}
+  room1: {fileID: 1433955382}
+  room2: {fileID: 1925903434}
+  room3: {fileID: 413669276}
+  room4: {fileID: 466668947}
+  room5: {fileID: 2042602028}
 --- !u!1 &1112382262
 GameObject:
   m_ObjectHideFlags: 0
@@ -5912,7 +5927,7 @@ Transform:
   m_LocalScale: {x: 22.733885, y: 0.48292363, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 747038780}
+  m_Father: {fileID: 1734116355}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1112382264
 MonoBehaviour:
@@ -6605,7 +6620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc9ba74489b6ca47bffad8bc62c8499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bouncePower: 11
+  greenPlatformSO: {fileID: 11400000, guid: 60f671635a21fb24b9e43fab8cc8a9e3, type: 2}
 --- !u!61 &1292865987
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7256,7 +7271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc9ba74489b6ca47bffad8bc62c8499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bouncePower: 11
+  greenPlatformSO: {fileID: 11400000, guid: 60f671635a21fb24b9e43fab8cc8a9e3, type: 2}
 --- !u!61 &1389825746
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7448,7 +7463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc9ba74489b6ca47bffad8bc62c8499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bouncePower: 11
+  greenPlatformSO: {fileID: 11400000, guid: 60f671635a21fb24b9e43fab8cc8a9e3, type: 2}
 --- !u!61 &1444388264
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7693,37 +7708,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1529975608
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1529975609}
-  m_Layer: 0
-  m_Name: Walls/floor/ceiling
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1529975609
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1529975608}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7239714, y: -0.6731962, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1541568426
 GameObject:
   m_ObjectHideFlags: 0
@@ -7755,7 +7739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc9ba74489b6ca47bffad8bc62c8499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bouncePower: 11
+  greenPlatformSO: {fileID: 11400000, guid: 60f671635a21fb24b9e43fab8cc8a9e3, type: 2}
 --- !u!61 &1541568428
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8682,7 +8666,7 @@ Transform:
   m_LocalScale: {x: 4.7467823, y: 10.1520405, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 58710180}
+  m_Father: {fileID: 1795360275}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1716153918
 BoxCollider2D:
@@ -8917,6 +8901,7 @@ Transform:
   m_Children:
   - {fileID: 1258600264}
   - {fileID: 1529695465}
+  - {fileID: 1112382263}
   m_Father: {fileID: 747038780}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1781408725
@@ -9015,6 +9000,7 @@ Transform:
   - {fileID: 1954812443}
   - {fileID: 1804996061}
   - {fileID: 782667717}
+  - {fileID: 1716153917}
   m_Father: {fileID: 58710180}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1804996060
@@ -9511,7 +9497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc9ba74489b6ca47bffad8bc62c8499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bouncePower: 11
+  greenPlatformSO: {fileID: 11400000, guid: 60f671635a21fb24b9e43fab8cc8a9e3, type: 2}
 --- !u!61 &2005465157
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9781,7 +9767,7 @@ Transform:
   m_GameObject: {fileID: 2042602027}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -6.44, y: 5.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9862,7 +9848,6 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 519420032}
   - {fileID: 181026506}
-  - {fileID: 1529975609}
   - {fileID: 621801538}
   - {fileID: 58710180}
   - {fileID: 1597577309}

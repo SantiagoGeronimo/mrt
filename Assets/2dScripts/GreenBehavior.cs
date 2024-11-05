@@ -5,7 +5,7 @@ using UnityEngine;
 public class GreenBehavior : MonoBehaviour
 {
     private SpriteRenderer rendererComponent;
-    [SerializeField] private float bouncePower;
+    [SerializeField] private GreenPlatformSO greenPlatformSO;
     private bool isBouncing = false;
     private void Awake()
     {
@@ -33,7 +33,7 @@ public class GreenBehavior : MonoBehaviour
             var playerRb = collision.GetComponent<Rigidbody2D>();
             var playerMv = collision.GetComponent<PlayerMovement>();
             playerRb.velocity = Vector2.zero;
-            playerRb.velocity = new Vector2(playerRb.velocity.x, bouncePower);
+            playerRb.velocity = new Vector2(playerRb.velocity.x, greenPlatformSO.bouncePower);
             playerMv.bouncing = true;
         }
     }

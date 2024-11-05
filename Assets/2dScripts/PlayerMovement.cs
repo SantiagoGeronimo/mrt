@@ -13,10 +13,8 @@ public class PlayerMovement : MonoBehaviour
     private float dashingCooldown = 1f;
 
     private bool isWallSliding;
-    public float wallSlidingSpeed = 0.5f; // Ajuste de velocidad de resbalado
 
-    [SerializeField] private float speed;
-    [SerializeField] private float jumpingPower;
+    [SerializeField] private PlayerDataSO playerData;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -56,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            rb.velocity = new Vector2(rb.velocity.x, playerData.jumpingPower);
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
@@ -83,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
         // Control del movimiento horizontal
         if (!isWallSliding) // Solo se mueve en el eje X si no está resbalando
         {
-            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+            rb.velocity = new Vector2(horizontal * playerData.speed, rb.velocity.y);
         }
     }
 
@@ -97,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         if (IsWalled() && !IsGrounded())
         {
             isWallSliding = true;
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y - 0.1f, -wallSlidingSpeed, float.MaxValue));
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y - 0.1f, -playerData.wallSlidingSpeed, float.MaxValue));
         }
         else
         {
