@@ -6,11 +6,8 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     private bool isFacingRight = true;
 
-    private bool canDash = true;
+    public bool canDash { get; private set; }
     public bool isDashing = false;
-    private float dashingPower = 18f;
-    private float dashingTime = 0.2f;
-    private float dashingCooldown = 1f;
 
     private bool isWallSliding;
 
@@ -27,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        canDash = true;
         if (saveAndReset != null)
         {
             saveAndReset.SavePosition(this.gameObject.transform.position);
@@ -126,13 +124,13 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        rb.velocity = new Vector2(transform.localScale.x * playerData.dashingPower, 0f);
         tr.emitting = true;
-        yield return new WaitForSeconds(dashingTime);
+        yield return new WaitForSeconds(playerData.dashingTime);
         tr.emitting = false;
         rb.gravityScale = originalGravity;
         isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
+        yield return new WaitForSeconds(playerData.dashingCooldown);
         canDash = true;
     }
 
